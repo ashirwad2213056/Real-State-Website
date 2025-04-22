@@ -1,5 +1,6 @@
+import {useEffect} from "react";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
 // import {searchLine}  from 'react-icons/ri'
 import { useSelector } from "react-redux";
@@ -7,6 +8,24 @@ import { useSelector } from "react-redux";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchTermFromUrl = urlParams.get("search");
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  } , [location.search])
+
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("search", searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  }
+    
   // console.log("currentUser:", currentUser);
 
   return (
@@ -19,12 +38,16 @@ export default function Header() {
           </h1>
         </Link>
         <form className="bg-slate-100  p-3 rounded-lg flex items-center">
-          <input
+          <input 
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             type="text"
             placeholder="Search..."
             className="focus:outline-none w-24 sm:w-64 "
           />
-          <CiSearch className="size-7" />
+          <button onClick={handleSearch}>
+            <CiSearch  className="size-7 text-slate-700" />
+          </button>
         </form>
         <ul className="flex gap-6">
           <Link to="Home">
