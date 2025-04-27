@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import ListingCard from '../Components/ListingCard'
 
 export default function Search() {
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function Search() {
 //   console.log(sidebardata);
     const [loading, setLoading] = React.useState(false);
     const [listings, setListings] = React.useState([]);
-    console.log(listings);
+    // console.log(listings);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -168,8 +168,17 @@ export default function Search() {
                <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-80'>Search</button>
             </form>
         </div>
-        <div className='text-2xl font-semibold  p-3 text-slate-700  mt-5'>
-            <h1 className='border-b-2 border-slate-300 '>Listing Results:</h1>
+        <div className='flex-1'>
+            <h1 className='text-2xl font-semibold  p-3 text-slate-700  mt-5 '>Listing Results:</h1>
+            <div className='p-6  flex flex-wrap gap-6'>{!loading && listings.length === 0 && (<p className='text-xl text-slate-800'>Listing Not Found!</p>)}
+            {
+                loading && (<p className='text-xl text-slate-800 text-center w-full '>Loading...</p>)
+            }
+            {!loading && listings && listings.map((listing) =>(
+                <ListingCard key={listing._id} 
+                listing={listing}/>
+                
+            ))}</div>
         </div>
     </div>
   )

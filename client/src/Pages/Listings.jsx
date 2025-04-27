@@ -88,9 +88,13 @@ export default function Listing() {
               <p className=" bg-red-800 w-full max-w-[200px] text-white p-1 rounded-md text-center" >
                 {listing.type === "rent" ? "For Rent" : " For Sale"}
               </p>
-              {listing.offer && (
-                <p className=" bg-green-800 w-full max-w-[200px] text-white p-1 rounded-md text-center">${+listing.regularPrice - +listing.discountedPrice}</p>
-              )}
+
+              {listing.offer ? (
+                <p className=" bg-green-800 w-full max-w-[200px] text-white p-1 rounded-md text-center">${+listing.regularPrice - +listing.discountedPrice} OFF</p>
+              ) : `No offer available` }
+              {/* <p>{console.log('listing.offer:', listing.offer)}</p> */}
+
+
             </div>
             <p className="text-slate-800">
             <span className="font-semibold text-black ">Description - {' '}</span>

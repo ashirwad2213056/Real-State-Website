@@ -227,7 +227,7 @@ export default function CreateListing() {
               The first image will be the cover (max 6)
             </span>
           </p>
-          <div className="flex flex-row gap-6">
+          <div className="flex flex-wrap w-full  gap-6">
             <input
               onChange={(e) => setImages(e.target.files)}
               className="bg-white hover:bg-gray-50 p-3 border rounded-lg border-gray-300"
