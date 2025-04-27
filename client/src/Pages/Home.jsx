@@ -59,7 +59,7 @@ export default function Home() {
   return (
     <div className='m-2'>
       {/* Top Section */}
-      <div className='flex flex-col gap-6 p-30 px-15 max-w-6xl'>
+      <div className='flex flex-col gap-6 p-30 px-15 max-w-6xl '>
         <h1 className='text-4xl lg:text-6xl font-bold'>
           Welcome to <span className='text-slate-600'>GayatriEstate</span>
           <br />
